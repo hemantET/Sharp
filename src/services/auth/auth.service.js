@@ -30,16 +30,10 @@ class AuthService {
         status: false,
         message: "Invalid username or password",
       };
-      const user = await this.UserModel.findOne({ email });
+      const user = await this.UserModel.findOne({ email }).populate('profile');
       if (user) {
           console.log(user,password)
         if (user["password"] === password) {
-          let userData = {
-            _id: user._id,
-            email: user["email"],
-            password: user["password"]
-           
-          };
 
           let token = utils.createJWT(userData);
           this._response = {
@@ -47,6 +41,7 @@ class AuthService {
             message: "Login success",
             data: {
               token,
+              user
             },
           };
 

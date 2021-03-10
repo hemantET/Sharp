@@ -7,18 +7,8 @@ let userSchema = mongoose.Schema({
   password: {
     type: String,
   },
-  firstname: {
-    type: String,
-  },
-  lastname: {
-    type: String,
-  },
-  profile_img: {
-    type: String,
-    default: "boat.png"
-  },
-  event:{
-      type:String
-  }
-});
+  profile: { type: mongoose.Schema.Types.ObjectId, ref: "userProfile" },
+  
+},
+{ collection: "users" });
 module.exports = mongoose.model("users", userSchema);

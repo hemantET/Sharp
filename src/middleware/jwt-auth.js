@@ -1,10 +1,13 @@
 const { verifyJWT } = require('../common/utils')
+const UserModel = require("../services/auth/auth.model")
 
 const jwtMiddleWare = async (req, res, next) => {
     try {
     if (req.headers.authorization) {
         let token = req.headers.authorization.split(' ')[1];
         tokenResponse = verifyJWT(token)
+        console.log('token',tokenResponse)
+       
         if (tokenResponse) {
             req.user = tokenResponse
             next()
