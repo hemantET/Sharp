@@ -7,8 +7,8 @@ router.get("/getAllAgenda", jwtMiddleWare, async (req, res) => {
   const result = await agendaService.getAgendas();
   return requestHelper.handleResponse(res, result);
 });
-router.post("/createAgenda", jwtMiddleWare, async (requ, res) => {
-  const result = await agendaService.createAgenda(requ);
+router.post("/createAgenda", jwtMiddleWare, async (req, res) => {
+  const result = await agendaService.createAgenda(req);
   return requestHelper.handleResponse(res, result);
 });
 
