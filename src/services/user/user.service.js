@@ -3,9 +3,9 @@ const Joi = require("joi");
 const utils = require("../../common/utils");
 const ObjectID = require("mongodb").ObjectID;
 class UserService {
-  constructor(UserModel,ProfileModel) {
+  constructor(UserModel, ProfileModel) {
     this.UserModel = UserModel;
-    this.ProfileModel = ProfileModel
+    this.ProfileModel = ProfileModel;
     this.getProfile = this.getProfile.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
 
@@ -27,7 +27,6 @@ class UserService {
         const user = {
           email: result[0].email,
           profile: result[0].profile,
-          
         };
         this._response = { status: true, data: user };
         return requestHelper.respondWithJsonBody(200, this._response);
@@ -54,10 +53,11 @@ class UserService {
       let id = req.params.id;
       let body = req.body;
 
-      let result = await this.UserModel.updateOne(
-        { _id: ObjectID(id) },
-        { $set: body }
-      ).populate('profile');
+      let result = await this.ProfileModel.findOneAndUpdate(
+        { userdata: ObjectID(id) },
+        { $set: body },
+        { new: true }
+      ).populate("userdata");
       console.log("res", result);
       if (result) {
         this._response = {

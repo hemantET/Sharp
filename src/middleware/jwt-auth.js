@@ -6,7 +6,7 @@ const jwtMiddleWare = async (req, res, next) => {
     if (req.headers.authorization) {
         let token = req.headers.authorization.split(' ')[1];
         tokenResponse = verifyJWT(token)
-        console.log('token',tokenResponse)
+     
        
         if (tokenResponse) {
             req.user = tokenResponse

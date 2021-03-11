@@ -34,6 +34,12 @@ class AuthService {
       if (user) {
           console.log(user,password)
         if (user["password"] === password) {
+          let userData = {
+            _id: user._id,
+            email: user["email"],
+            password: user["password"]
+           
+          };
 
           let token = utils.createJWT(userData);
           this._response = {

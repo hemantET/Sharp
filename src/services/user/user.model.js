@@ -14,6 +14,11 @@ let ProfileSchema = mongoose.Schema({
       event:{
           type:String
       },
+      userdata:{type: mongoose.Schema.Types.ObjectId, ref: "users" }
+     
+  
+    
+  
     //   agenda:[
     //     {
     //       type:String
